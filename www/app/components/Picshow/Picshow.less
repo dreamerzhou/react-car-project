@@ -1,0 +1,255 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	// overflow: hidden;
+}
+// rightpart 设置了 box-sizing: border-box
+@rightpartW: 300px;	 // @rightpartW = content+padding+border
+@rightpartpadding: 10px;
+
+.picshow {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: black;
+	
+	* {
+		box-sizing: border-box;
+		font-weight: "微软雅黑";
+		color: white;
+	}
+	.bigImgBox {
+		padding-right: @rightpartW;
+		height: 100%;
+
+		.inner {
+
+			position: relative;
+			height: 100%;
+
+			.bigimg {
+				position: absolute;
+				//  设置width height值，懒加载时，小图可充当大图★★★★★
+				width: 90%;
+				// height: 90%;		// 防止图片变形 ★★★★★
+				max-width: 90%;
+				// max-height: 90%;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+			.leftbtn {
+				position: absolute;
+				width: 50%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				cursor: url(/images/picture-cursor-left.cur), auto;
+			}
+			.rightbtn {
+				position: absolute;
+				width: 50%;
+				height: 100%;
+				top: 0;
+				right: 0;
+				cursor: url(/images/picture-cursor-right.cur), auto;
+			}
+			.loadtip {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 100px;
+				height: 100px;
+				text-align: center;
+				background: url(/images/loading.svg);
+				background-size: cover; // 图片铺满容器
+			}
+			.nobox {
+				position: absolute;
+				left:50px;
+				bottom:30px;
+				width:120px;
+				height:50px;
+				background: rgba(0, 0, 0, 0.2);
+				text-align: center;
+				line-height: 50px;
+				font-size: 30px;
+			}
+		}
+	}
+	.rightpart {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: @rightpartW;
+		height: 100%;
+		padding: @rightpartpadding;
+		// background: purple;
+		// 组件1
+		.carinfo {
+			overflow: hidden;
+			h1 {
+				font-size: 26px;
+				small {
+					font-size: 16px;
+				}
+			}
+			h3 {
+				font-size: 16px;
+				line-height: 26px;
+			}
+		}
+		// 组件2
+		.albums {
+			padding-top: 16px;
+			overflow: hidden;
+			ul {
+				li {
+					float: left;
+					width: 50%;
+					height: 50px;
+					line-height: 50px;
+					margin-bottom: 6px;
+					text-align: center;
+					background: #eee;
+					color: black;
+					font-size: 14px;
+					cursor: pointer;
+
+					&:nth-child(2n) {
+						border-left: 3px solid black;
+					}
+					&:nth-child(2n+1) {
+						border-right: 3px solid black;
+					}
+					&.cur {
+						background: khaki;
+					}
+				}
+			}
+		}
+		// 组件3
+		.carlikes {
+			padding-top: 16px;
+			.headerbox {
+				height: 25px;
+				line-height: 25px;
+				overflow: hidden;
+				h3 {
+					font-size: 16px;
+					line-height: 26px;
+				}
+			}
+			.contentbox {
+				position: relative;
+				height: 140px;
+				background: rgba(230, 230, 230, 0.3);
+				// 内容溢出隐藏
+				overflow: hidden;
+				ul {
+					position: relative;
+					// 提高权重，显示被 smallPics盒子 覆盖的li
+					z-index: 888;
+					line-height: 200%;
+					li {
+						cursor: pointer;
+						padding-left: 10px;
+						&.cur {
+							background: khaki;
+							color: black;
+						}
+					}
+				}
+				.bar {
+					position: absolute;
+					// 滑块被li元素覆盖  ★★★★★
+					z-index: 999;
+					top: 0;
+					right: 0;
+					width: 20px;
+					height: 100%;
+					background: #333;
+					b {
+						position: absolute;
+						z-index: 999;
+						top: 0;
+						left: 0;
+						width: 20px;
+						// height: 20px; // carlikes.js中按比例设置b的高度
+						background: khaki;
+					}
+				}
+			}
+		}
+		// 组件4
+		.smallpics {
+			padding-top: 20px;
+			overflow: hidden;
+			.unit {
+				width: 8000px;
+				overflow: hidden;
+				position: relative;
+				transition: all 0.4s ease 0s;
+				ul {
+					float: left;
+					width: @rightpartW - @rightpartpadding * 2;
+					margin-right: 6px;
+					height: 200px;
+					li {
+						position: relative;
+						float: left;
+						width: 50%;
+						margin-bottom: 6px;
+						&:nth-child(2n) {
+							border-left: 3px solid black;
+						}
+						&:nth-child(2n+1) {
+							border-right: 3px solid black;
+						}
+						img {
+							width: 100%;
+							height: 100%;
+							vertical-align: middle;
+						}
+						&::before {
+							content: "";
+							position: absolute; // 相对于 li的 绝对定位
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+							background-color: black;
+							opacity: 0.5;
+							transition: all 0.4s ease 0s;
+						}
+						&.cur::before {
+							opacity: 0;
+						}
+					}
+				}
+			}
+			.pagenav {
+				padding-top: 8px;
+				span {
+					float: left;
+					height: 8px;
+					background: #aaa;
+					border-left: 3px solid black;
+					border-right: 3px solid black;
+					cursor: pointer;
+					&:first-child {
+						border-left: none;
+					}
+					&:last-child {
+						border-right: none;
+					}
+					&.cur {
+						background: khaki;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+// 对象
+
+var result = {
+	"A" : [
+		{"奥迪": ["A4L", "A6L", "Q5", "Q7"]}
+	],
+	"B": [
+		{"宝马": ["3系", "5系", "X5", "X7"]},
+		{"本田": ["飞度", "思域", "雅阁", "缤智"]}
+	]
+}
+// 数组
+var options = [
+	{
+		value: "A",
+		label: "A",
+		children: [{
+			value: "奥迪",
+			label: "奥迪",
+			children: [
+				
+				{
+					value: "A4L",
+					label: "A4L"
+				},
+				{
+					value: "A6L",
+					label: "A6L"
+				},
+				{
+					value: "Q5",
+					label: "Q5"
+				},
+				{
+					value: "Q7",
+					label: "Q7"
+				}
+			]
+		}]
+	}
+]	
+
+result["B"].map((item, index) => {
+	// [0] ★★★★★ 
+	// Object.key(item)返回一个数组，Object.keys(item)[0] 返回是一个值
+	// console.log(Object.keys(item)[0]);
+	// console.log(Object.values(item));
+	// console.log(Object.values(item)[0]);
+})
+
+Object.keys(result).map(keyname=>{
+	// console.log(keyname);
+})
+
+// console.log(Object.keys(result));
+// console.log(Object.keys(result)[1]);
+// console.log(Object.values(result));
+// console.log(Object.values(result)[1]);
+
+Object.values(result["B"]).map(item => {
+	console.log(Object.values(item)[0]);  // ★★★★★ 思考：只能是[0]
+})
+</script>
