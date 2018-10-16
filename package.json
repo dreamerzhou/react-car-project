@@ -1,7 +1,7 @@
 {
   "name": "react_project",
   "version": "1.0.0",
-  "description": "爱前端的大项目",
+  "description": "前端大项目",
   "main": "app.js",
   "scripts": {
     "node": "node app.js",
